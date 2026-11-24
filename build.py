@@ -19,7 +19,9 @@ import zipfile
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 SKIP_DIRS = {"__pycache__", ".git", ".venv", "node_modules", ".idea", ".vscode"}
-SKIP_FILES = {".DS_Store"}
+# Listing assets, not shipped: the marketplace takes the logo through its own
+# form field, and an agent cannot read a PNG.
+SKIP_FILES = {".DS_Store", "icon.png", "icon.svg"}
 SKIP_EXT = {".zip", ".pyc"}
 
 

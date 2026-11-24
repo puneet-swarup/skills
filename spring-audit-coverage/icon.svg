@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="Audit log that stops partway">
+  <title>spring-audit-coverage</title>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#111C2E"/>
+      <stop offset="1" stop-color="#1E293B"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.28" cy="0.18" r="0.85">
+      <stop offset="0" stop-color="#334155" stop-opacity="0.85"/>
+      <stop offset="1" stop-color="#334155" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="512" height="512" rx="112" fill="url(#bg)"/>
+  <rect width="512" height="512" rx="112" fill="url(#glow)"/>
+  <rect x="4" y="4" width="504" height="504" rx="108" fill="none"
+        stroke="#FFFFFF" stroke-opacity="0.07" stroke-width="2"/>
+
+  <!-- two entries that were recorded -->
+  <rect x="104" y="138" width="304" height="34" rx="17" fill="#E2E8F0"/>
+  <rect x="104" y="239" width="304" height="34" rx="17" fill="#E2E8F0"/>
+
+  <!-- the log stops: recorded so far, then nothing -->
+  <rect x="104" y="340" width="146" height="34" rx="17" fill="#94A3B8"/>
+  <line x1="268" y1="357" x2="391" y2="357" stroke="#FBBF24" stroke-width="34"
+        stroke-dasharray="19 15" stroke-linecap="butt"/>
+</svg>

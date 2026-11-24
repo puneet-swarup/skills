@@ -83,7 +83,11 @@ SKILL.md                  instructions, workflow, rules
 scripts/scan.py           the scanner
 references/patterns.md    four implementation patterns, with trade-offs
 references/checklist.md   what an audit record must contain
+icon.svg                  icon source
+icon.png                  512x512, for the marketplace listing logo
 ```
+
+The icon is a listing asset, so `build.py` leaves it out of the shipped zip.
 
 ## Licence
 
