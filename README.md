@@ -8,6 +8,11 @@ instructions. The agent keeps the name and description in context, loads the bod
 request matches, and opens the bundled scripts and references only when a step calls for
 them. Nothing is compiled and nothing runs on a server.
 
+This repo is a home for every skill I publish. Each folder is self-contained and can be
+lifted into its own repository unchanged — so the repo-level description and topics stay
+deliberately general, and the keywords that make a skill findable live with the skill, in
+its `SKILL.md` frontmatter and its README.
+
 ## What's here
 
 | Skill | What it does | Price |
