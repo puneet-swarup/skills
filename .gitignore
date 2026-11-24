@@ -1,0 +1,12 @@
+# Build outputs: zips are produced by `make zip`, never committed
+*.zip
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Editor / OS
+.DS_Store
+.idea/
+.vscode/
