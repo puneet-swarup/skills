@@ -3,7 +3,7 @@
 
 Stdlib only, no network, works on Windows, macOS and Linux without `make` or `zip`.
 
-    python build.py zip spring-audit-coverage   build <skill>.zip for upload
+    python build.py zip <skill>                 build <skill>.zip for upload
     python build.py zip --all                   build every skill
     python build.py check                       compile every script in the tree
     python build.py clean                       remove zips and __pycache__

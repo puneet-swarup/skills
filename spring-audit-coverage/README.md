@@ -87,7 +87,7 @@ icon.svg                  icon source
 icon.png                  512x512, for the marketplace listing logo
 ```
 
-The icon is a listing asset, so `build.py` leaves it out of the shipped zip.
+The icon files are listing assets and are not part of the distributed zip.
 
 ## Licence
 
