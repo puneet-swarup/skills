@@ -60,7 +60,7 @@ CATEGORIES = [
     )),
     ('documents', 20, (
         'document', 'upload', 'download', 'attachment', 'export', 'import', 'file',
-        'report', 'statement', 'pdf', 'share', 'delete', 'remove',
+        'report', 'statement', 'pdf', 'share',
     )),
 ]
 
@@ -388,9 +388,17 @@ def scan(root, include_tests=False):
                         line_of(src, body_open + hit.start()))
 
             category, score = classify(full, java_method, http_method)
-            is_page = not is_rest and re.search(r'public\s+String\s+\w+\s*\(', signature)
-            if is_page:
-                category, score = 'page render', 5
+            notes = []
+            if not is_rest and re.search(r'public\s+String\s+\w+\s*\(', signature):
+                # A @Controller returning String renders a view only if it returns a
+                # template name. Returning a constant is a text body.
+                literal = re.search(r'return\s+"([^"]*)"\s*;', body)
+                is_view = bool(literal) and re.fullmatch(r'[a-z][a-z0-9/_-]*', literal.group(1))
+                if is_view and '@ResponseBody' not in cheader + signature:
+                    category, score = 'page render', 5
+                    notes.append('returns a template name - confirm this is an audit event')
+                else:
+                    notes.append('returns a String body, not a template - ranked as data')
 
             endpoints.append({
                 'endpoint': full,
@@ -404,6 +412,7 @@ def scan(root, include_tests=False):
                 'category': category,
                 'score': score,
                 'risk': risk_label(score),
+                'notes': notes,
             })
 
     return {
@@ -474,11 +483,12 @@ def report(result, root):
                 e['risk'], e['category'], e['score']))
         o.append('')
         o.append('Where each row lives:\n')
-        o.append('| Endpoint | File | Line |')
-        o.append('|---|---|---|')
+        o.append('| Endpoint | File | Line | Note |')
+        o.append('|---|---|---|---|')
         for e in gaps:
-            o.append('| `{}` {} | `{}` | {} |'.format(
-                e['endpoint'], e['method'], e['file'], e['line']))
+            o.append('| `{}` {} | `{}` | {} | {} |'.format(
+                e['endpoint'], e['method'], e['file'], e['line'],
+                '; '.join(e.get('notes') or []) or '-'))
         o.append('')
 
     if done:
