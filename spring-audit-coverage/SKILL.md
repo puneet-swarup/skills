@@ -2,7 +2,7 @@
 name: spring-audit-coverage
 description: Audit a Spring Boot codebase for missing audit logging on regulated operations — money movement, customer data, document handling, deletes. Use when the user asks whether audit logging is complete, needs evidence for a compliance or security review, wants traceability of who changed what, or asks to add audit trails to existing controllers and services.
 summary: Scans a Spring Boot repo and lists every controller endpoint with no audit logging, ranked by blast radius - money movement first, then customer identity, then documents - and proposes the lightest fix for the worst one. Use when asked whether audit logging is complete, or to add audit trails.
-version: 1.0.3
+version: 1.0.4
 tags: spring boot, java, audit logging, audit trail, compliance, soc 2, pci dss, api security, spring security, code review
 keywords: audit coverage, audit logging gaps, spring boot audit, endpoint inventory, pii masking, traceability, java, spring mvc
 use_cases: audit logging review, compliance evidence, soc 2 readiness, pci dss audit trail, pre-release code review, bfsi and insurance audit
@@ -27,12 +27,13 @@ the order that matters.
 Run the scanner against the repository root:
 
 ```
-python <this-skill>/scripts/scan.py <repo-root>
+python /absolute/path/to/spring-audit-coverage/scripts/scan.py /absolute/path/to/repo
 ```
 
-Run the script from this skill's folder, or pass its absolute path. Your working
-directory is usually the user's project, not this skill — `scripts/scan.py` on its own
-will not resolve from there.
+Substitute both paths. Your working directory is the user's project, not this skill, so
+`scripts/scan.py` on its own will not resolve — and a repo that happens to have its own
+`scripts/` directory turns that into a confusing "No such file". Use the absolute path.
+The same applies to every `references/...` file below.
 
 It writes a markdown report to stdout. Read it before doing anything else.
 
@@ -52,8 +53,11 @@ reporting anything. Confirm by hand:
 - check for a shared base controller
 - check `application.yml` for an audit starter or logging configuration
 
-If audit happens somewhere central, say so and stop. Do not pad the report with false
-gaps — a wrong gap report destroys trust faster than a missing one.
+If audit happens somewhere central, say so and stop. "Stop" means: report where audit
+happens, name the endpoints it covers and any it excludes, and do not propose code. A
+one-paragraph answer is a complete deliverable when the answer is "already covered".
+Do not pad the report with false gaps — a wrong gap report destroys trust faster than a
+missing one.
 
 ### 3. Rank the gaps
 
@@ -92,4 +96,12 @@ Report as a table, worst first:
 | Endpoint | Method | Operation | Audited? | Risk |
 |---|---|---|---|---|
 
+The Risk column carries the scanner's category and score verbatim, for example
+`medium (documents, score 35)`. Do not invent a scale.
+
 Then a short "what I would change first" list — three items maximum.
+
+**Non-HTTP gaps get their own section.** The scanner reports scheduled jobs and Feign
+clients separately because they are not endpoints. A `@Scheduled` job that creates
+money-adjacent records has no caller to audit and no row in the table above; list those
+under a "background work" heading, or they get silently dropped.

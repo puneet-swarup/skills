@@ -30,7 +30,7 @@ python scripts/scan.py . --out report.md          # save the report
 
 ## What the output looks like
 
-Real run against a Spring Boot service, trimmed to the top rows:
+Real output, trimmed to the top rows:
 
 ```
 ## Summary
@@ -39,7 +39,7 @@ Real run against a Spring Boot service, trimmed to the top rows:
 - Controllers: 5
 - Endpoints found: 8
 - With audit logging in the method: 0
-- **Without audit logging: 8**
+- **Without audit logging: 3**
 - Central infrastructure found, but none of it mentions auditing
 
 ## Endpoints without audit logging, worst first
@@ -50,6 +50,10 @@ Real run against a Spring Boot service, trimmed to the top rows:
 | `/api/documents/upload` | POST | `upload()` | no | medium (documents, score 30) |
 | `/api/chat/stream` | POST | `stream()` | no | low (other, score 20) |
 ```
+
+A snapshot from a real service, trimmed. Your numbers will differ — the point is the shape:
+a ranked table, a file and line for every row, and the central-infrastructure verdict
+above it.
 
 Every row carries a file and line in a second table, so "not audited" is a claim you can
 check rather than one you have to trust.
