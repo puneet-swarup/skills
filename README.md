@@ -54,8 +54,8 @@ python build.py list                        # skills and their versions
 
 `build.py` is standard-library Python, so it works on Windows, macOS and Linux without
 `make` or a `zip` binary. Release tags match the `version:` field in each `SKILL.md`, and
-the zip is attached to the tag. So `spring-audit-coverage` `v1.0.0` here is the same
-artifact that goes to the marketplace.
+the zip is attached to the tag. So the asset on a release is exactly the artifact that
+goes to the marketplace.
 
 Marketplace submission copy lives in [`listings/`](listings/), one file per skill. It stays
 outside the skill folder so the shipped zip contains only what the agent needs.
