@@ -13,6 +13,7 @@ Stdlib only, no network, works on Windows, macOS and Linux without `make` or `zi
 import argparse
 import os
 import re
+import re
 import shutil
 import sys
 import zipfile
@@ -133,6 +134,119 @@ def cmd_clean(_args):
     return 0
 
 
+SHEET_SECTIONS = [
+    ("Name", "name"),
+    ("Summary", "summary"),
+    ("Description", "description"),
+    ("See it in action", "see_it"),
+    ("Compatibility note", "compatibility"),
+    ("Tags and use cases", "tags"),
+    ("Limitations and FAQ", "faq"),
+]
+
+
+def split_sections(text):
+    """Split markdown on '## ' headings that are not inside a fenced block."""
+    sections, cur, buf, in_fence = {}, None, [], False
+    for line in text.splitlines():
+        if line.strip().startswith("```"):
+            in_fence = not in_fence
+        if not in_fence and line.startswith("## "):
+            if cur is not None:
+                sections[cur] = "\n".join(buf).strip()
+            cur, buf = line[3:].strip(), []
+        elif cur is not None:
+            buf.append(line)
+    if cur is not None:
+        sections[cur] = "\n".join(buf).strip()
+    return sections
+
+
+def unwrap(body):
+    """A section that is exactly one fenced block yields its inner text."""
+    stripped = body.strip()
+    if not stripped.startswith("```"):
+        return stripped
+    first_nl = stripped.find("\n")
+    close = stripped.rfind("```")
+    if close <= first_nl:
+        return stripped
+    inner = stripped[first_nl + 1:close].strip()
+    if stripped[close + 3:].strip():
+        return stripped          # more content after the block: keep it all
+    return inner
+
+
+def listing_sections(skill):
+    path = os.path.join(ROOT, "listings", skill + ".md")
+    if not os.path.isfile(path):
+        return {}
+    raw = split_sections(open(path, encoding="utf-8").read())
+    out = {}
+    for heading, key in SHEET_SECTIONS:
+        for name, body in raw.items():
+            if name.startswith(heading):
+                out[key] = unwrap(body)
+                break
+    return out
+
+
+def cmd_agensi(args):
+    """Write one self-contained submission sheet per skill, at the repo root."""
+    for skill in args.names:
+        meta = frontmatter(skill)
+        sec = listing_sections(skill)
+        if not sec:
+            print("  {}: no listings/{}.md".format(skill, skill), file=sys.stderr)
+            continue
+        price_line = ""
+        path = os.path.join(ROOT, "listings", skill + ".md")
+        for line in open(path, encoding="utf-8").read().splitlines():
+            if line.lower().startswith(("free", "$")) or "one-time" in line.lower():
+                price_line = line.strip()
+                break
+        rows = [
+            ("ZIP", "{}.zip".format(skill)),
+            ("Agensi tools", "Skip. No image, video, voice or live-data service."),
+            ("Logo", "{}/icon.png".format(skill)),
+            ("Name", meta.get("name", skill)),
+            ("Summary", sec.get("summary", "")),
+            ("Description", sec.get("description", "")),
+            ("See it in action", sec.get("see_it", "")),
+            ("Compatibility note", sec.get("compatibility", "")),
+            ("Pricing", price_line or "(set on the form)"),
+            ("Categories", "Up to 3 of the 32 on the form. Closest developer-tools "
+                           "first, then security or compliance. Use the form's own names."),
+            ("Tags and use cases", sec.get("tags", "")),
+            ("Permissions", "Read what the scan detected. Expect: reads local files, "
+                            "no network."),
+            ("Limitations and FAQ", sec.get("faq", "")),
+            ("Screenshots and video", "Skip."),
+            ("Docs link", "Leave empty. Never a private repo."),
+        ]
+        out = ["# Agensi submission sheet — {}".format(skill), "",
+               "Generated from `listings/{}.md` and the skill frontmatter.".format(skill),
+               "Every field below is the exact text to paste. Nothing to look up.",
+               "Regenerate with `python build.py agensi {}`.".format(skill), "",
+               "| # | Field | Value |", "|---|---|---|"]
+        for i, (field, value) in enumerate(rows, 1):
+            short = value if len(value) <= 60 and "\n" not in value else "see below"
+            out.append("| {} | {} | {} |".format(i, field, short.replace("|", "\\|")))
+        out.append("")
+        for i, (field, value) in enumerate(rows, 1):
+            out.append("## {}. {}".format(i, field))
+            out.append("")
+            out.append("````")
+            out.append(value)
+            out.append("````")
+            out.append("")
+        target = os.path.join(ROOT, "AGENSI-{}.md".format(skill))
+        with open(target, "w", encoding="utf-8") as f:
+            f.write("\n".join(out) + "\n")
+        print("  wrote {}".format(os.path.relpath(target, ROOT)))
+    return 0
+
+
 def cmd_list(_args):
     for skill in skills():
         meta = frontmatter(skill)
@@ -153,6 +267,9 @@ def main():
     sub.add_parser("check", help="compile every script").set_defaults(func=cmd_check)
     sub.add_parser("clean", help="remove zips and caches").set_defaults(func=cmd_clean)
     sub.add_parser("list", help="list skills").set_defaults(func=cmd_list)
+    a = sub.add_parser("agensi", help="write a submission sheet per skill")
+    a.add_argument("names", nargs="*")
+    a.set_defaults(func=cmd_agensi)
 
     args = ap.parse_args()
     return args.func(args)

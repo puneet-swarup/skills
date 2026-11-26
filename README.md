@@ -40,6 +40,16 @@ Each skill also runs standalone where it ships a script:
 python spring-audit-coverage/scripts/scan.py /path/to/your/spring/boot/repo
 ```
 
+## Submission sheets
+
+Each skill has a self-contained Agensi submission sheet at the repo root,
+`AGENSI-<skill>.md`: every form field with the exact text to paste. It is generated, so it
+cannot drift from the listing copy.
+
+```bash
+python build.py agensi <skill>
+```
+
 ## Building the zip
 
 Agensi and similar marketplaces take a zip, not a git checkout. Zips are build outputs
