@@ -41,6 +41,36 @@ a paid one needs Stripe Connect or Zoneless first.
 - [ ] Permissions shown match what the code actually does.
 - [ ] The zip came from a release tag, and the tag matches `version:` in `SKILL.md`.
 
+## Paid listings
+
+A paid listing cannot be submitted until a payout method is connected — for India that is
+Zoneless, with its own identity check. Do that first; it is the only hard gate.
+
+- Minimum price is $1. Under $5, buyers can only pay from their Agensi balance; from $5 they
+  can also use a card.
+- A free skill converted to paid makes everyone already using it buy it to keep using it.
+  Past buyers are never charged again. Prefer a separate paid listing over a conversion.
+- Price changes go live immediately, with no review.
+
+## Linking listings to each other
+
+Ranked by effort, cheapest first.
+
+1. **Cross-reference in the copy.** Text edits go live with no review. The free listing's
+   description should end by naming the paid companion; the paid listing's FAQ should say
+   which free skill to run first. Both are one sentence.
+2. **The storefront.** Every creator page lists all your skills, so anyone who arrives from
+   one listing can see the rest. Nothing to configure — it happens when they are live.
+3. **The "Start here" collection** in Creator Studio → Growth. Curate the order you want a
+   newcomer to meet the skills in.
+4. **A bundle** of two or more live paid listings, priced below the sum of the parts. Only
+   possible once both are live.
+5. **The repo.** The public repo's README table lists the free skills; paid ones are named
+   in the paid listing's FAQ rather than linked to a private repo.
+
+**Docs link field:** never point it at a private repository. Buyers cannot open it, so it
+reads as a broken link. Leave it empty or point at the storefront.
+
 ## After you submit
 
 Status goes Draft → Pending → Live or Rejected. Scan, AI review, then a person; most are
