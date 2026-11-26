@@ -18,6 +18,7 @@ its `SKILL.md` frontmatter and its README.
 | Skill | What it does | Price |
 |---|---|---|
 | [spring-audit-coverage](spring-audit-coverage/) | Finds every Spring Boot endpoint with no audit logging and ranks the gaps by blast radius | Free |
+| [spring-migration-review](spring-migration-review/) | Reviews Flyway and Liquibase migrations for the statements that lose data or lock a table | Free |
 
 ## Using a skill
 

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="Table columns, one dropped">
+  <title>spring-migration-review</title>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#111C2E"/>
+      <stop offset="1" stop-color="#1E293B"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.28" cy="0.18" r="0.85">
+      <stop offset="0" stop-color="#334155" stop-opacity="0.85"/>
+      <stop offset="1" stop-color="#334155" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="url(#bg)"/>
+  <rect width="512" height="512" rx="112" fill="url(#glow)"/>
+  <rect x="4" y="4" width="504" height="504" rx="108" fill="none"
+        stroke="#FFFFFF" stroke-opacity="0.07" stroke-width="2"/>
+  <rect x="128" y="140" width="44" height="232" rx="22" fill="#E2E8F0"/>
+  <rect x="234" y="140" width="44" height="232" rx="22" fill="#E2E8F0"/>
+  <rect x="340" y="140" width="44" height="120" rx="22" fill="#FBBF24"/>
+  <line x1="362" y1="288" x2="362" y2="330" stroke="#FBBF24" stroke-width="44"
+        stroke-dasharray="16 14" stroke-linecap="butt"/>
+</svg>
