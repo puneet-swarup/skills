@@ -120,31 +120,21 @@ checked whether the central infrastructure covered the gaps.
 **Output (trimmed)**
 
 ```
-# Audit coverage report
-
-## Summary
-
-- Java files read: 35
-- Controllers: 5
-- Endpoints found: 8
-- With audit logging in the method: 0
+- Java files read: **35**
+- Controllers: **5**
+- Endpoints found: **8**
+- With audit logging in the method: **0**
 - **Without audit logging: 8**
-- Central infrastructure found, but none of it mentions auditing
-
-## Central audit infrastructure
-
 | Kind | Where | Audit-aware |
+
 |---|---|---|
 | advice | `src/main/java/com/personavault/config/GlobalExceptionHandler.java`:27 | no |
-
-## Endpoints without audit logging, worst first
-
-| Endpoint | Method | Operation | Audited? | Risk |
-|---|---|---|---|---|
-| `/api/documents/{id}` | DELETE | `deleteDocument()` | no | medium (documents, score 35) |
-| `/api/documents/upload` | POST | `upload()` | no | medium (documents, score 30) |
-| `/api/chat/stream` | POST | `stream()` | no | low (other, score 20) |
-| `/api/documents` | GET | `listDocuments()` | no | low (documents, score 20) |
+| Endpoint | Method | Operation | Audited? | Risk | What an auditor asks |
+|---|---|---|---|---|---|
+| `/api/documents/{id}` | DELETE | `deleteDocument()` | no | medium (documents, score 35) | who accessed or destroyed this record - SOC 2 CC7.2, ISO 27001 A.8.15 |
+| `/api/documents/upload` | POST | `upload()` | no | medium (documents, score 30) | who accessed or destroyed this record - SOC 2 CC7.2, ISO 27001 A.8.15 |
+| `/api/chat/stream` | POST | `stream()` | no | low (other, score 20) | every access to this component is logged - PCI DSS 10.2 |
+| `/api/documents` | GET | `listDocuments()` | no | low (documents, score 20) | who accessed or destroyed this record - SOC 2 CC7.2, ISO 27001 A.8.15 |
 ```
 
 **What the agent then said**
