@@ -41,6 +41,18 @@ a paid one needs Stripe Connect or Zoneless first.
 - [ ] Permissions shown match what the code actually does.
 - [ ] The zip came from a release tag, and the tag matches `version:` in `SKILL.md`.
 
+## The platform generates its own example
+
+Below whatever you put in "See it in action", the listing renders a generated session of
+its own — "Worked / Read your context and instructions / Compiled the skill" — sometimes
+with sample code. You cannot always remove it, and it can contradict your copy: one
+generated block stored an account number unmasked on a skill whose selling point is
+masking.
+
+Check the live page after saving, not just the form. If a generated block is wrong and
+sits in your field, delete it. If it comes back, it is theirs — report it rather than
+editing fiction by hand.
+
 ## Paid listings
 
 A paid listing cannot be submitted until a payout method is connected — for India that is
