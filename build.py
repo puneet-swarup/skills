@@ -199,11 +199,14 @@ def cmd_agensi(args):
         if not sec:
             print("  {}: no listings/{}.md".format(skill, skill), file=sys.stderr)
             continue
+        # The price comes from the "## Price" section, not from the first line that
+        # happens to start with "Free" — the file's intro does too.
         price_line = ""
         path = os.path.join(ROOT, "listings", skill + ".md")
-        for line in open(path, encoding="utf-8").read().splitlines():
-            if line.lower().startswith(("free", "$")) or "one-time" in line.lower():
-                price_line = line.strip()
+        raw = split_sections(open(path, encoding="utf-8").read())
+        for name, body in raw.items():
+            if name.startswith("Price"):
+                price_line = unwrap(body).split("\n")[0].strip()
                 break
         rows = [
             ("ZIP", "{}.zip".format(skill)),

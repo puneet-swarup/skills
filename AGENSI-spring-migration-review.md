@@ -14,7 +14,7 @@ Regenerate with `python build.py agensi spring-migration-review`.
 | 6 | Description | see below |
 | 7 | See it in action | see below |
 | 8 | Compatibility note | see below |
-| 9 | Pricing | see below |
+| 9 | Pricing | Free. |
 | 10 | Categories | see below |
 | 11 | Tags and use cases | see below |
 | 12 | Permissions | see below |
@@ -152,7 +152,7 @@ Requires Python 3.8+. Standard library only, no dependencies, no network access.
 ## 9. Pricing
 
 ````
-Free listing. The analyzer half of a migration-safety pair; the paid implementation half is
+Free.
 ````
 
 ## 10. Categories
