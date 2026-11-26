@@ -56,7 +56,8 @@ a ranked table, a file and line for every row, and the central-infrastructure ve
 above it.
 
 Every row carries a file and line in a second table, so "not audited" is a claim you can
-check rather than one you have to trust.
+check rather than one you have to trust. Each gap also states what an auditor asks about
+that class of operation — indicative control mappings, not a compliance opinion.
 
 ## How it decides
 
@@ -85,7 +86,6 @@ check rather than one you have to trust.
 ```
 SKILL.md                  instructions, workflow, rules
 scripts/scan.py           the scanner
-references/patterns.md    four implementation patterns, with trade-offs
 references/checklist.md   what an audit record must contain
 icon.svg                  icon source
 icon.png                  512x512, for the marketplace listing logo

@@ -1,8 +1,8 @@
 ---
 name: spring-audit-coverage
 description: Audit a Spring Boot codebase for missing audit logging on regulated operations — money movement, customer data, document handling, deletes. Use when the user asks whether audit logging is complete, needs evidence for a compliance or security review, wants traceability of who changed what, or asks to add audit trails to existing controllers and services.
-summary: Scans a Spring Boot repo and lists every controller endpoint with no audit logging, ranked by blast radius - money movement first, then customer identity, then documents - and proposes the lightest fix for the worst one. Use when asked whether audit logging is complete, or to add audit trails.
-version: 1.0.4
+summary: Scans a Spring Boot repo and lists every controller endpoint with no audit logging, ranked by blast radius - money movement first, then customer identity, then documents - with what an auditor asks about each gap. Use when asked whether audit logging is complete, or to find out which endpoints have no audit trail.
+version: 1.0.5
 tags: spring boot, java, audit logging, audit trail, compliance, soc 2, pci dss, api security, spring security, code review
 keywords: audit coverage, audit logging gaps, spring boot audit, endpoint inventory, pii masking, traceability, java, spring mvc
 use_cases: audit logging review, compliance evidence, soc 2 readiness, pci dss audit trail, pre-release code review, bfsi and insurance audit
@@ -68,14 +68,20 @@ Order by blast radius, not by file name:
 3. **Documents** — upload, download, delete, share
 4. **Everything else** — reads, lookups, configuration
 
-### 4. Propose before rewriting
+### 4. State what to fix first, and stop there
 
-For each gap, state the operation, the actor, and what an auditor would want to see.
-Then offer the change. Read `references/patterns.md` for the four implementation
-patterns and pick the lightest one that fits the codebase.
+For the top gap, state three things: the operation, the actor, and the question an auditor
+would ask about it. That is the deliverable — diagnosis, with evidence.
 
-Never silently refactor a controller. Show the diff, explain the choice, let the user
-decide.
+**Do not write the implementation.** Choosing the wiring, getting the transaction boundary
+right, masking before the sink and proving it with a test is a separate job, and getting it
+half-right is worse than not starting. Name the pattern that applies — an explicit call at
+the service state change, an aspect, a filter, or a transactional outbox — and say that the
+fix and its verification are a different piece of work. If the user wants the implementation
+done, that is where a dedicated skill or a careful hand-written change belongs.
+
+What matters is that they can act on the report: a ranked list, a file and line per row, and
+the reason each gap is a problem rather than a number.
 
 ### 5. What a record must contain
 

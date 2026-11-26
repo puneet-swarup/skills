@@ -16,7 +16,7 @@ spring-audit-coverage
 ## Summary (max 300 chars — 294)
 
 ```
-Scans a Spring Boot repo and lists every controller endpoint with no audit logging, ranked by blast radius - money movement first, then customer identity, then documents - and proposes the lightest fix for the worst one. Use when asked whether audit logging is complete, or to add audit trails.
+Scans a Spring Boot repo and lists every controller endpoint with no audit logging, ranked by blast radius - money movement first, then customer identity, then documents - with the question an auditor asks about each gap. Use when asked whether audit logging is complete, or which endpoints have no audit trail.
 ```
 
 ## Price
@@ -77,9 +77,12 @@ for audit infrastructure in one place — aspects, filters, interceptors, contro
 audited base classes — and if any of it mentions auditing, it marks the gaps `unconfirmed`
 rather than reporting them as fact.
 
-Then it proposes the lightest fix that fits: an explicit call at the service boundary, an
-aspect, a filter, or a transactional outbox, with the trade-offs of each. It will not add a
-dependency, change an HTTP contract, or let an audit write block a transaction.
+Each gap is stated in the terms an auditor uses — who moved the money, who changed access,
+who destroyed the record — with an indicative control mapping (SOC 2, PCI DSS, ISO 27001).
+That is what turns a list of endpoints into a reason to act.
+
+It diagnoses. It does not write the implementation, because a half-correct audit trail is
+worse than none.
 
 ### Where it stops
 

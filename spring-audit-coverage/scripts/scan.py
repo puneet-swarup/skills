@@ -66,6 +66,18 @@ CATEGORIES = [
 
 METHOD_WEIGHT = {'DELETE': 15, 'PUT': 10, 'PATCH': 10, 'POST': 10, 'GET': 0, 'ANY': 5}
 
+# The question an auditor asks about this class of operation. Indicative mappings:
+# they are what a review usually turns on, not a legal opinion.
+AUDITOR_ASKS = {
+    'money movement': "who moved the money, when, and did it succeed - SOC 2 CC7.2, "
+                      "PCI DSS 10.2",
+    'customer identity': "who changed access or identity, and who approved it - "
+                         "SOC 2 CC6.1, PCI DSS 10.2.5",
+    'documents': "who accessed or destroyed this record - SOC 2 CC7.2, ISO 27001 A.8.15",
+    'other': "every access to this component is logged - PCI DSS 10.2",
+    'page render': "not usually an audit event",
+}
+
 
 # --- Java source handling ---
 
@@ -413,6 +425,7 @@ def scan(root, include_tests=False):
                 'score': score,
                 'risk': risk_label(score),
                 'notes': notes,
+                'auditor_asks': AUDITOR_ASKS.get(category, ''),
             })
 
     return {
@@ -474,13 +487,14 @@ def report(result, root):
 
     if gaps:
         o.append('## Endpoints without audit logging, worst first\n')
-        o.append('| Endpoint | Method | Operation | Audited? | Risk |')
-        o.append('|---|---|---|---|---|')
+        o.append('| Endpoint | Method | Operation | Audited? | Risk | What an auditor asks |')
+        o.append('|---|---|---|---|---|---|')
         for e in gaps:
             mark = 'no' if not aware else 'unconfirmed'
-            o.append('| `{}` | {} | `{}()` | {} | {} ({}, score {}) |'.format(
+            o.append('| `{}` | {} | `{}()` | {} | {} ({}, score {}) | {} |'.format(
                 e['endpoint'], e['method'], e['operation'], mark,
-                e['risk'], e['category'], e['score']))
+                e['risk'], e['category'], e['score'],
+                e.get('auditor_asks', '').replace('|', '\\|') or '-'))
         o.append('')
         o.append('Where each row lives:\n')
         o.append('| Endpoint | File | Line | Note |')
@@ -520,6 +534,9 @@ def report(result, root):
     o.append('')
     o.append('A row marked "unconfirmed" is not a gap yet. Verify central coverage first, '
              'then report it.')
+    o.append('')
+    o.append('Control mappings are indicative — what a review usually turns on. Confirm '
+             'with your auditor; this is not a compliance opinion.')
     o.append('')
     return '\n'.join(o)
 
