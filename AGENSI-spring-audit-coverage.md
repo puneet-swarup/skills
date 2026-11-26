@@ -104,6 +104,10 @@ If your audit logging is already centralised, it will tell you so and stop. That
 correct answer, not a failure to find work.
 
 ---
+
+If the scan finds gaps you need to close, spring-audit-implementation covers the fix: aspect or filter wiring, masking before the sink, and an audit write that survives a rollback.
+
+---
 ````
 
 ## 7. See it in action

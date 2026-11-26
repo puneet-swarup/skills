@@ -96,6 +96,10 @@ correct answer, not a failure to find work.
 
 ---
 
+If the scan finds gaps you need to close, spring-audit-implementation covers the fix: aspect or filter wiring, masking before the sink, and an audit write that survives a rollback.
+
+---
+
 ## See it in action
 
 **Request**
