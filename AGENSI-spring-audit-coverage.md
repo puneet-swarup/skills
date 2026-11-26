@@ -131,15 +131,27 @@ checked whether the central infrastructure covered the gaps.
 **Output (trimmed)**
 
 ```
+# Audit coverage report
+
+Scanned: `payment-service`
+
+## Summary
+
 - Java files read: **35**
 - Controllers: **5**
 - Endpoints found: **8**
 - With audit logging in the method: **0**
 - **Without audit logging: 8**
-| Kind | Where | Audit-aware |
+- Central infrastructure found, but none of it mentions auditing
 
+## Central audit infrastructure
+
+| Kind | Where | Audit-aware |
 |---|---|---|
 | advice | `src/main/java/com/personavault/config/GlobalExceptionHandler.java`:27 | no |
+
+## Endpoints without audit logging, worst first
+
 | Endpoint | Method | Operation | Audited? | Risk | What an auditor asks |
 |---|---|---|---|---|---|
 | `/api/documents/{id}` | DELETE | `deleteDocument()` | no | medium (documents, score 35) | who accessed or destroyed this record - SOC 2 CC7.2, ISO 27001 A.8.15 |
