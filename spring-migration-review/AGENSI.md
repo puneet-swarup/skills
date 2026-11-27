@@ -96,6 +96,10 @@ checksum — so the answer is a new migration that compensates, not an edit to t
   it decides whether a finding is fixable by editing.
 
 ---
+
+If a finding needs rewriting rather than just reporting, spring-migration-safe-rewrite produces the safe sequence - expand-contract across releases, batched backfill, CONCURRENTLY handled outside the transaction, and a rollback you have run.
+
+---
 ````
 
 ## 7. Demo — what the user asks
