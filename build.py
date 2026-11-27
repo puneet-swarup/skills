@@ -22,7 +22,7 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 SKIP_DIRS = {"__pycache__", ".git", ".venv", "node_modules", ".idea", ".vscode"}
 # Listing assets, not shipped: the marketplace takes the logo through its own
 # form field, and an agent cannot read a PNG.
-SKIP_FILES = {".DS_Store", "icon.png", "icon.svg"}
+SKIP_FILES = {".DS_Store", "icon.png", "icon.svg", "AGENSI.md"}
 SKIP_EXT = {".zip", ".pyc"}
 
 
@@ -260,7 +260,7 @@ def cmd_agensi(args):
             out.append(value)
             out.append("````")
             out.append("")
-        target = os.path.join(ROOT, "AGENSI-{}.md".format(skill))
+        target = os.path.join(ROOT, skill, "AGENSI.md")
         with open(target, "w", encoding="utf-8") as f:
             f.write("\n".join(out) + "\n")
         print("  wrote {}".format(os.path.relpath(target, ROOT)))
