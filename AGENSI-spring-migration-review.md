@@ -12,15 +12,16 @@ Regenerate with `python build.py agensi spring-migration-review`.
 | 4 | Name | spring-migration-review |
 | 5 | Summary | see below |
 | 6 | Description | see below |
-| 7 | See it in action | see below |
-| 8 | Compatibility note | see below |
-| 9 | Pricing | Free. |
-| 10 | Categories | see below |
-| 11 | Tags and use cases | see below |
-| 12 | Permissions | see below |
-| 13 | Limitations and FAQ | see below |
-| 14 | Screenshots and video | Skip. |
-| 15 | Docs link | Leave empty. Never a private repo. |
+| 7 | Demo — what the user asks | see below |
+| 8 | Demo — what they get back | see below |
+| 9 | Compatibility note | see below |
+| 10 | Pricing | Free. |
+| 11 | Categories | see below |
+| 12 | Tags and use cases | see below |
+| 13 | Permissions | see below |
+| 14 | Limitations and FAQ | see below |
+| 15 | Screenshots and video | Skip. |
+| 16 | Docs link | Leave empty. Never a private repo. |
 
 ## 1. ZIP
 
@@ -96,15 +97,15 @@ checksum — so the answer is a new migration that compensates, not an edit to t
 ---
 ````
 
-## 7. See it in action
+## 7. Demo — what the user asks
 
 ````
-**Request**
-
-```
 We deploy on Thursday. Review these migrations and tell me what could go wrong.
-```
+````
 
+## 8. Demo — what they get back
+
+````
 **What the agent did**
 
 Ran `python scripts/scan.py .` against the repository, then separated the findings into
@@ -139,7 +140,7 @@ edited.
 ---
 ````
 
-## 8. Compatibility note
+## 9. Compatibility note
 
 ````
 ```
@@ -149,32 +150,32 @@ Requires Python 3.8+. Standard library only, no dependencies, no network access.
 ---
 ````
 
-## 9. Pricing
+## 10. Pricing
 
 ````
 Free.
 ````
 
-## 10. Categories
+## 11. Categories
 
 ````
 Up to 3 of the 32 on the form. Closest developer-tools first, then security or compliance. Use the form's own names.
 ````
 
-## 11. Tags and use cases
+## 12. Tags and use cases
 
 ````
 database migration, flyway, liquibase, sql, postgresql, mysql, schema change, data loss, zero downtime, devops
 review a migration before deploy, pre-release schema review, incident review after a lock, flyway changelog check, liquibase rollback check
 ````
 
-## 12. Permissions
+## 13. Permissions
 
 ````
 Read what the scan detected. Expect: reads local files, no network.
 ````
 
-## 13. Limitations and FAQ
+## 14. Limitations and FAQ
 
 ````
 **Does it run the migrations?**
@@ -192,13 +193,13 @@ Because the fix is the hard part and it is a separate piece of work. This tells 
 will hurt; rewriting the migration safely needs your table sizes, traffic and rollback plan.
 ````
 
-## 14. Screenshots and video
+## 15. Screenshots and video
 
 ````
 Skip.
 ````
 
-## 15. Docs link
+## 16. Docs link
 
 ````
 Leave empty. Never a private repo.

@@ -199,15 +199,31 @@ def cmd_agensi(args):
         if not sec:
             print("  {}: no listings/{}.md".format(skill, skill), file=sys.stderr)
             continue
-        # The price comes from the "## Price" section, not from the first line that
-        # happens to start with "Free" — the file's intro does too.
+        # The price comes from the "## Price" section. Scanning for the first line
+        # containing "one-time" matched the file's intro paragraph instead.
         price_line = ""
         path = os.path.join(ROOT, "listings", skill + ".md")
-        raw = split_sections(open(path, encoding="utf-8").read())
-        for name, body in raw.items():
+        raw_sections = split_sections(open(path, encoding="utf-8").read())
+        for name, body in raw_sections.items():
             if name.startswith("Price"):
                 price_line = unwrap(body).split("\n")[0].strip()
                 break
+        # The demo is two form fields: what the user types, and what they get back.
+        # Emitting them as one block makes the platform interleave its own output.
+        demo = sec.get("see_it", "")
+        split_at = demo.find("**What the agent did**")
+        if split_at == -1:
+            split_at = demo.find("**Output (trimmed)**")
+        if split_at > 0:
+            raw_request = demo[:split_at].strip()
+            # The form field is already labelled "what the user asks" - drop the header
+            # and the code fence, leave the prompt itself.
+            raw_request = re.sub(r"^\*\*Request\*\*\s*", "", raw_request)
+            demo_request = unwrap(raw_request)
+            demo_result = demo[split_at:].strip()
+        else:
+            demo_request, demo_result = demo, ""
+
         rows = [
             ("ZIP", "{}.zip".format(skill)),
             ("Agensi tools", "Skip. No image, video, voice or live-data service."),
@@ -215,7 +231,8 @@ def cmd_agensi(args):
             ("Name", meta.get("name", skill)),
             ("Summary", sec.get("summary", "")),
             ("Description", sec.get("description", "")),
-            ("See it in action", sec.get("see_it", "")),
+            ("Demo — what the user asks", demo_request),
+            ("Demo — what they get back", demo_result),
             ("Compatibility note", sec.get("compatibility", "")),
             ("Pricing", price_line or "(set on the form)"),
             ("Categories", "Up to 3 of the 32 on the form. Closest developer-tools "

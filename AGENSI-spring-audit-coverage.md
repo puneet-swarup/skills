@@ -12,15 +12,16 @@ Regenerate with `python build.py agensi spring-audit-coverage`.
 | 4 | Name | spring-audit-coverage |
 | 5 | Summary | see below |
 | 6 | Description | see below |
-| 7 | See it in action | see below |
-| 8 | Compatibility note | see below |
-| 9 | Pricing | Free. No payout method needed for a free listing. |
-| 10 | Categories | see below |
-| 11 | Tags and use cases | see below |
-| 12 | Permissions | see below |
-| 13 | Limitations and FAQ | see below |
-| 14 | Screenshots and video | Skip. |
-| 15 | Docs link | Leave empty. Never a private repo. |
+| 7 | Demo — what the user asks | see below |
+| 8 | Demo — what they get back | see below |
+| 9 | Compatibility note | see below |
+| 10 | Pricing | Free. No payout method needed for a free listing. |
+| 11 | Categories | see below |
+| 12 | Tags and use cases | see below |
+| 13 | Permissions | see below |
+| 14 | Limitations and FAQ | see below |
+| 15 | Screenshots and video | Skip. |
+| 16 | Docs link | Leave empty. Never a private repo. |
 
 ## 1. ZIP
 
@@ -113,16 +114,16 @@ If the scan finds gaps you need to close, spring-audit-implementation covers the
 ---
 ````
 
-## 7. See it in action
+## 7. Demo — what the user asks
 
 ````
-**Request**
-
-```
 Is our audit logging complete? Point the scanner at the repo in the current directory
 and tell me what to fix first.
-```
+````
 
+## 8. Demo — what they get back
+
+````
 **What the agent did**
 
 Ran `python scripts/scan.py .` against a Spring Boot service, then read the report and
@@ -171,7 +172,7 @@ Scanned: `payment-service`
 ---
 ````
 
-## 8. Compatibility note
+## 9. Compatibility note
 
 ````
 ```
@@ -181,32 +182,32 @@ Requires Python 3.8+. Standard library only, no dependencies, no network access.
 ---
 ````
 
-## 9. Pricing
+## 10. Pricing
 
 ````
 Free. No payout method needed for a free listing.
 ````
 
-## 10. Categories
+## 11. Categories
 
 ````
 Up to 3 of the 32 on the form. Closest developer-tools first, then security or compliance. Use the form's own names.
 ````
 
-## 11. Tags and use cases
+## 12. Tags and use cases
 
 ````
 spring boot, java, audit logging, audit trail, compliance, soc 2, pci dss, api security, spring security, code review
 audit logging review, compliance evidence, soc 2 readiness, pci dss audit trail, pre-release code review, bfsi and insurance audit
 ````
 
-## 12. Permissions
+## 13. Permissions
 
 ````
 Read what the scan detected. Expect: reads local files, no network.
 ````
 
-## 13. Limitations and FAQ
+## 14. Limitations and FAQ
 
 ````
 **Does it need network access?**
@@ -227,13 +228,13 @@ Any agent that loads `SKILL.md` skills — Claude Code, Codex, Cursor and simila
 plain markdown and standard-library Python.
 ````
 
-## 14. Screenshots and video
+## 15. Screenshots and video
 
 ````
 Skip.
 ````
 
-## 15. Docs link
+## 16. Docs link
 
 ````
 Leave empty. Never a private repo.
