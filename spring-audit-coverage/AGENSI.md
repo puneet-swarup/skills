@@ -6,7 +6,7 @@ Regenerate with `python build.py agensi spring-audit-coverage`.
 
 | # | Field | Value |
 |---|---|---|
-| 1 | ZIP | spring-audit-coverage.zip |
+| 1 | ZIP | see below |
 | 2 | Agensi tools | Skip. No image, video, voice or live-data service. |
 | 3 | Logo | spring-audit-coverage/icon.png |
 | 4 | Name | spring-audit-coverage |
@@ -27,6 +27,7 @@ Regenerate with `python build.py agensi spring-audit-coverage`.
 
 ````
 spring-audit-coverage.zip
+https://github.com/puneet-swarup/skills/releases/download/current/spring-audit-coverage.zip
 ````
 
 ## 2. Agensi tools

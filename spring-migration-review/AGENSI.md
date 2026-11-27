@@ -6,7 +6,7 @@ Regenerate with `python build.py agensi spring-migration-review`.
 
 | # | Field | Value |
 |---|---|---|
-| 1 | ZIP | spring-migration-review.zip |
+| 1 | ZIP | see below |
 | 2 | Agensi tools | Skip. No image, video, voice or live-data service. |
 | 3 | Logo | spring-migration-review/icon.png |
 | 4 | Name | spring-migration-review |
@@ -27,6 +27,7 @@ Regenerate with `python build.py agensi spring-migration-review`.
 
 ````
 spring-migration-review.zip
+https://github.com/puneet-swarup/skills/releases/download/current/spring-migration-review.zip
 ````
 
 ## 2. Agensi tools

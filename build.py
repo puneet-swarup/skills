@@ -19,6 +19,7 @@ import sys
 import zipfile
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
+REPO = "skills"
 SKIP_DIRS = {"__pycache__", ".git", ".venv", "node_modules", ".idea", ".vscode"}
 # Listing assets, not shipped: the marketplace takes the logo through its own
 # form field, and an agent cannot read a PNG.
@@ -192,6 +193,12 @@ def listing_sections(skill):
     return out
 
 
+def download_url(skill):
+    """Stable per-skill URL: the rolling 'current' release, not a versioned tag."""
+    return "https://github.com/puneet-swarup/{}/releases/download/current/{}.zip".format(
+        REPO, skill)
+
+
 def cmd_agensi(args):
     """Write one self-contained submission sheet per skill, at the repo root."""
     for skill in args.names:
@@ -226,7 +233,7 @@ def cmd_agensi(args):
             demo_request, demo_result = demo, ""
 
         rows = [
-            ("ZIP", "{}.zip".format(skill)),
+            ("ZIP", "{0}.zip\n{1}".format(skill, download_url(skill))),
             ("Agensi tools", "Skip. No image, video, voice or live-data service."),
             ("Logo", "{}/icon.png".format(skill)),
             ("Name", meta.get("name", skill)),
