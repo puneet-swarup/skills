@@ -87,8 +87,8 @@ that class of operation — indicative control mappings, not a compliance opinio
 SKILL.md                  instructions, workflow, rules
 scripts/scan.py           the scanner
 references/checklist.md   what an audit record must contain
-icon.svg                  icon source
-icon.png                  512x512, for the marketplace listing logo
+spring-audit-coverage-icon.svg icon source
+spring-audit-coverage-icon.png 512x512, for the marketplace listing logo
 ```
 
 The icon files are listing assets and are not part of the distributed zip.

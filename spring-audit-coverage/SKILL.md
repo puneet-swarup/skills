@@ -2,7 +2,7 @@
 name: spring-audit-coverage
 description: Audit a Spring Boot codebase for missing audit logging on regulated operations — money movement, customer data, document handling, deletes. Use when the user asks whether audit logging is complete, needs evidence for a compliance or security review, wants traceability of who changed what, or asks to add audit trails to existing controllers and services.
 summary: Scans a Spring Boot repo and lists every controller endpoint with no audit logging, ranked by blast radius - money movement first, then customer identity, then documents - with what an auditor asks about each gap. Use when asked whether audit logging is complete, or to find out which endpoints have no audit trail.
-version: 1.0.5
+version: 1.0.6
 tags: spring boot, java, audit logging, audit trail, compliance, soc 2, pci dss, api security, spring security, code review
 keywords: audit coverage, audit logging gaps, spring boot audit, endpoint inventory, pii masking, traceability, java, spring mvc
 use_cases: audit logging review, compliance evidence, soc 2 readiness, pci dss audit trail, pre-release code review, bfsi and insurance audit

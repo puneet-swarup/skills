@@ -22,7 +22,7 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 SKIP_DIRS = {"__pycache__", ".git", ".venv", "node_modules", ".idea", ".vscode"}
 # Listing assets, not shipped: the marketplace takes the logo through its own
 # form field, and an agent cannot read a PNG.
-SKIP_FILES = {".DS_Store", "icon.png", "icon.svg", "AGENSI.md"}
+SKIP_FILES = {".DS_Store", "AGENSI.md"}
 SKIP_EXT = {".zip", ".pyc"}
 
 
@@ -65,7 +65,8 @@ def build_one(skill):
         for dirpath, dirnames, filenames in os.walk(os.path.join(ROOT, skill)):
             dirnames[:] = sorted(d for d in dirnames if d not in SKIP_DIRS)
             for fn in sorted(filenames):
-                if fn in SKIP_FILES or os.path.splitext(fn)[1] in SKIP_EXT:
+                if fn in SKIP_FILES or fn.endswith(("-icon.png", "-icon.svg")) \
+                        or os.path.splitext(fn)[1] in SKIP_EXT:
                     continue
                 full = os.path.join(dirpath, fn)
                 arc = os.path.relpath(full, ROOT).replace(os.sep, "/")

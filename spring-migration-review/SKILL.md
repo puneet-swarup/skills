@@ -2,7 +2,7 @@
 name: spring-migration-review
 description: Review database migrations before they run in production and find the statements that lose data or lock a table — DROP TABLE and DROP COLUMN, TRUNCATE, column type changes, NOT NULL added without a default, CREATE INDEX without CONCURRENTLY, UPDATE or DELETE with no WHERE, constraints added to a large table, and Liquibase changesets with no rollback. Use when asked to review a migration, check a Flyway or Liquibase changelog before deploying, explain why a deploy locked the database, or prepare a schema change for a release. Covers Flyway, Liquibase, PostgreSQL and MySQL.
 summary: Reviews Flyway and Liquibase migrations for the seven statements that lose data or lock a table in production, each with the cost and the safe direction. Use before deploying a schema change, or when a migration has already caused a lock or a lost column.
-version: 1.0.0
+version: 1.0.1
 tags: database migration, flyway, liquibase, sql, postgresql, mysql, schema change, data loss, zero downtime, devops
 keywords: migration review, destructive ddl, drop column, table lock, create index concurrently, expand contract, rollback, changelog
 use_cases: review a migration before deploy, pre-release schema review, incident review after a lock, flyway changelog check, liquibase rollback check

@@ -59,8 +59,8 @@ tables that already hold data.
 SKILL.md                       workflow, rules, where it stops
 scripts/scan.py                the seven checks
 references/what-goes-wrong.md  what each statement does to a live table
-icon.svg                       icon source
-icon.png                       512x512, for the marketplace listing logo
+spring-migration-review-icon.svg icon source
+spring-migration-review-icon.png 512x512, for the marketplace listing logo
 ```
 
 The icon files are listing assets and are not part of the distributed zip.
