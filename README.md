@@ -19,6 +19,7 @@ its `SKILL.md` frontmatter and its README.
 |---|---|---|
 | [spring-audit-coverage](spring-audit-coverage/) | Finds every Spring Boot endpoint with no audit logging and ranks the gaps by blast radius | Free |
 | [spring-migration-review](spring-migration-review/) | Reviews Flyway and Liquibase migrations for the statements that lose data or lock a table | Free |
+| [spring-logging-hygiene](spring-logging-hygiene/) | Reviews Java logging for PII leaks, lost stack traces and unjoinable logs | Free |
 
 ## Using a skill
 
